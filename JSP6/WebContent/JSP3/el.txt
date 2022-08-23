@@ -19,6 +19,14 @@
 	* initParam
 	* pageContext
 
+	* p.517 EL 표현식 - 비교연산자
+	
+	== <--> eq
+	!= <--> ne
+	<  <--> lt
+	>  <--> gt
+	<= <--> le
+	>= <--> ge
 
 	* JSTL (JSP Standard Tag Library) : 아파치에서 제공하는 자주 사용되는 기능을
 	  태그로 표현한 형태 (커스텀 태그) 
