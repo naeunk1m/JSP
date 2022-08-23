@@ -36,8 +36,13 @@
 	0 데이터가 있으면 원래 데이터 출력, 없으면 0으로 표시
 	<fmt:formatNumber value="10.5" pattern="##.00"/><hr>
 	
-	0.5 => 50%
+	0.5 => 50% <br>
+	<fmt:formatNumber value="0.7845" type="percent"/><hr>
+	<fmt:formatNumber value="${43/21 }" type="percent"/><hr>
 	
+	월급 : <fmt:formatNumber value="${money }" type="currency"/>원<br>
+	월급 : <fmt:formatNumber value="${money }" type="currency" currencySymbol="$"/>원<br>
+	월급 : <fmt:formatNumber value="${money }" type="currency" currencySymbol="&"/>원<br>
 	
 	
 	

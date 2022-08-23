@@ -37,3 +37,17 @@
 	4) XML : xml 문서 처리
 
 
+
+	* 서블릿 (servlet) : 웹 상에서 실행되는 자바 클래스 파일
+	
+	JSP -> JAVA -> class -> 서버
+	
+	* 서블릿 생성규칙
+	1) javax.servlet.Servlet 인터페이스 구현
+	2) 1)을 구현하기 어려운 경우, javax.servlet.http.HttpServlet을 상속한다.
+	3) 요청/응답에 대한 처리메서드 doGET(), doPOST()를 구현
+	4) 메서드 전달인자 선언(javax.servlet.http.httpServletRequest,
+					 javax.servlet.http.httpServletResponse)
+	5) java.io.IOException, javax.servlet.ServletException 예외처리 해야함
+	6) web.xml(배포서술자)를 서블릿과 url을 매핑
+

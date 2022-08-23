@@ -10,15 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-<!--   에러 페이지 설정 -->
-<!-- <error-page> -->
-<!-- <error-code>404</error-code> -->
-<!-- <location>/error/404Error.jsp</location> -->
-<!-- </error-page> -->
-<!-- <error-page> -->
-<!-- <error-code>500</error-code> -->
-<!-- <location>/error/500Error.jsp</location> -->
-<!-- </error-page> -->
+  <servlet>
+  	<servlet-name>ItwillServlet</servlet-name>
+  	<servlet-class>com.itwillbs.servlet.ItwillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ItwillServlet</servlet-name>
+  	<url-pattern>/busan.com</url-pattern>
+  </servlet-mapping>
+  
+  
   
   
 </web-app>
