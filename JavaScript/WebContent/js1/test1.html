@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+		// 	한줄짜리 주석  ctrl shift c
+	 	/*  여러줄짜리 주석  (사용 안하는 코드, 코드 설명)*/
+	 	/*  ctrl shift /  */
+	 	//  body에 출력하겠다. => html 코드 작성
+// 	 	document.write("안녕하세요 1<br>");
+// 	 	document.write("안녕하세요 2<br>");
+// 	 	document.write("안녕하세요 3<br>");
+// 	 	document.write("안녕하세요 4<br>");
+// 	 	document.write("안녕하세요 5<br>");
+
+
+		// + (1 연산자,2 연결자)
+		// 연산자 (숫자+숫자)
+		// 연결자 (문자+a)
+		document.write("100 + 200");
+		document.write("100" + "200");
+		document.write(100 + 200);
+		document.write(100 + '200');
+		document.write("<br>");
+		//  100 + 200 = 300
+		document.write("10011111"+"+"+"200"+"="+(100+200));
+		
+		console.log("콘솔창 로그 출력");
+		
+		
+		// 변수(Variables) : 데이터값을 저장하는 공간(메모리)
+		// -> 한번에 하나만 저장가능
+		
+		//  변수사용
+		// 1) 변수 선언
+		// 2) 변수 초기화
+		// 3) 변수 사용(재사용)
+
+		// 데이터타입 :  문자형(String), 숫자형(Number),논리형(Boolean),Null
+		
+		//  int number = 100;
+		// var 변수명 = 100; (타입상관없이 모든 변수의 타입은 var 표현)
+		
+		// 변수명 작성 규칙
+		// 한글사용x, 영문+숫자, 특수문자(_,$)
+		// 의미 있는 단어사용
+		// =>  카멜표기법 :단어 + 단어 연결되는 단어의 첫글자 대문자
+		// =>  스네이크 표기법 : 단어_단어
+		// =>  파스칼 표기법 : 단어 첫글자 대문자 (자바 클래스명)
+		var number = 100;
+		//var a = 100;
+		var box = 5;
+		var sizeOfBox = 5;
+		//var 숫자 = 100;
+		
+		// 문자형 : 문자/숫자 데이터를  "",'' 감싸서 표시하는 데이터
+		// 본인의 이름을 저장하는 변수 생성후 화면에 출력
+		
+		var myName = "홍길동";
+		document.write(myName);
+		
+		//var myName = 100; (x)
+		myName = 100; // 사용은 가능
+		
+		var tmp = 200;
+		document.write(myName);
+		document.write(tmp);
+		
+		// 문자형 데이터를 통해서 html 코드를 출력 가능 (태그로 인식)
+		var tagValue = "<h2> 자바스크립트 @@@ </h2>";
+		document.write(tagValue);
+		
+		// 숫자형 : 숫자 데이터만 저장가능
+		number = 100;
+		number = 3.1234;
+		number = -3.1234;
+		
+		//"100"+100;
+		document.write( Number("100")+100 );
+		// Number("숫자") :  문자형태의 숫자데이터를 숫자데이터로 변경
+		
+		// 논리형 데이터(Boolean) : true(참) false(거짓)
+		
+		// 비교연산 => 논리형
+		var result = 100 > 200;
+		document.write(result+"<br>" );
+		
+		// Boolean() : 결과에 따른 true/false 리턴
+		// => 0,null,undefined 입력 - false
+		// =>       "          외 모든 데이터 -true
+		
+		// if(0) =>  false, if(1)=>true,   if("itwill")=>true
+		
+		document.write( Boolean(1) +"<br>");
+		document.write( Boolean(0) +"<br>");
+		document.write( Boolean('a') +"<br>");
+		document.write( Boolean('A') +"<br>");
+		document.write( Boolean(null) +"<br>");
+		
+		// null,undefined 
+		
+		var a;
+		var b=null; // 초기화 (객체)
+		
+		document.write(a);
+		document.write(b);
+		
+		//var abc = ???;
+		
+		
+		// 자바스크립트는 변수를 객체 형태로 저장 (var ) 타입하나로
+		// 모든 데이터타입을 저장할 수 있다.
+		// => 저장되어있는 데이터타입을 구분 불가능
+		// typeof 변수/데이터
+		
+		document.write( typeof a );
+		document.write( typeof b );
+		document.write( typeof "itwill" );
+		
+		
+		
+		
+	 	
+	 	
+	 	
+	</script>
+</head>
+<body>
+ <h1>WebContent/js1/test1.html</h1>
+    a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a
+
+</body>
+</html>

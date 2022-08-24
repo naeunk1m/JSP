@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KIM NAEUN</title>
+<script type="text/javascript">
+	// 이벤트 : 브라우저에서 발생하는 모든 동작(키보드 입력, 마우스)
+	// 이벤트 핸들러 : 해당 이벤트 발생 시 수행하는 동작
+	
+	function fun(){
+		alert('실행'); 
+		
+	}
+	
+	// BOM(브라우저 객체 모델) : 브라우저에 내장되어 있는 객체
+	// 계층적 구조
+	// [ window, document, screen, location, history, navigator....etc]
+	
+	// window 객체
+	// window.aaa
+	
+	
+	// window 객체 정보는 생략가능!
+	// window.alert("TEST");
+	// alert("TEST");
+	// 새 창 열기
+	// 	window.open("url 주소","이름","옵션");
+	// 	window.open("https://naver.com","","width=500,height=500")
+
+	function myOpen(){
+		window.open("https://naver.com","","width=500,height=500,top=450,left=1900")
+	// 	top: 위에서 얼만큼 띄우고 팝업창을 띄울지, left: 왼쪽에서 얼마나 띄울건지
+	}
+	
+	// 창 닫기
+	// window.close();
+	
+	// 버튼 생성 후 클릭했을 때 test1-1.html 페이지 생성 후 오픈
+	// 창닫기 버튼으로 새 창 닫는 동작 구현
+	
+	function test1(){
+		window.open("test1-1.html","","width=500,height=500,top=450,left=1900")
+	}
+	
+	// 페이지 객체 제목 속성(변수)
+	alert(window.document.title);
+	window.document.title="김나은";
+	
+	// (속성) - location 
+	// test1 실행 시 test1-1 페이지 실행하는 방법
+	// test1 페이지 주소를 test1-1 페이지 주소로 변경한다 
+	window.document.location = "test1-1.html";
+	
+	
+</script>
+</head>
+<body>
+	<h1>test1.html</h1>
+	
+<!-- 	<input type="button" value = "버튼1" onclick="js 호출가능"> -->
+		<INPUT TYPE="BUTTON" VALUE = "버튼1" ONCLICK="alert('버튼 클릭!');">
+<!-- 	버튼 더블클릭 시 "더블클릭 !  !  !" alert() 동작 구현 -->
+		<INPUT TYPE="BUTTON" VALUE = "버튼2" ondblclick="alert('더블클릭! ! !');">
+<!-- 	마우스 오버 이벤트 발생 시 fun() - alert("실행"); 출력  -->
+		<input type="button" value = "버튼3" onmouseover="fun();">
+		<hr>
+		
+<!-- 	클릭했을 때 네이버를 새 창으로 열기 -->
+<!-- 	1. 		<input type="button" value = "새창열기" onclick='window.open("https://naver.com","","width=500,height=500")'> -->
+<!--   	2.  --> <input type="button" value = "새창열기" onclick="myOpen()">
+	<hr>
+		<INPUT TYPE="BUTTON" VALUE = "test1-1 열기" ONCLICK="test1();">
+		
+
+		
+
+</body>
+</html>

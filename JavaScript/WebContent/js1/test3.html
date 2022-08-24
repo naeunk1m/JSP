@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+	//제어문 : 프로그램의 흐름을 제어하는 실행문
+	// (조건문, 반복문, 선택문)
+	
+	// 조건문 - if()문 ; 조건문이 참일 때만 실행
+	
+// 	if(조건문) {
+// 		실행문;
+// 	}
+	
+	//		실행문이 한 줄일 때 중괄호 생략가능
+	//		 	if(조건문)
+	// 			실행문;
+
+	
+// 	if (100>50) {
+// 		alert("@@");
+// 	}
+
+	// Boolean() : 결과에 따른 true/false 리턴
+	// => 0, null, undefined 입력 - false
+	// => 					외 모든 데이터 - true
+	
+	// if(0) => false, if(1) => true, if("itwill")=>true
+
+// 	if (0) {
+// 		alert("@@");
+// 	} // false. 
+
+// 	if (1) {
+// 		alert("112");
+// 	} // true.
+	
+	// 변수의 절대값 계산해서 출력
+	
+	// var num = -100;
+// 	var num = prompt("숫자를 입력하세요.","");
+// 	alert(typeof num);
+	// "" 공백 문자
+	
+	
+	
+// 	if(num > 0){
+//  		document.write("num(양수) :"+num);
+// 	}
+
+// 	if(num < 0){
+//  		document.write("num(음수) :"+(-num));
+// 	num = -num;
+// 	}
+ 
+// 	document.write("num : "+(num));
+	
+// 	document.write("<hr>");
+//	코드 줄이기
+//	한 줄로 만들기
+// 	document.write( num<0? -num:num);
+// 	document.write("<hr>");
+
+	// prompt(text, defaultText)
+	// prompt("테스트","1234");
+	
+// if와 else를 사용, if와 if를 사용하는 게 같은 의미일까 ? 	
+// 	if(조건문) {
+// 		참 - 실행문1;
+// 	}else{
+// 		거짓 - 실행문2;
+// 	}
+	
+// 	if(조건문)
+// 	if(조건문)
+
+	// => 변수 값이 홀수 혹은 짝수인지 판별하는 코드를 작성.
+// 		var num1 = 2
+// 		if(num%2 !=0){
+// 			alert("홀수!")
+// 		}
+// 		else{
+// 			alert("짝수!")
+// 		}	
+	
+	
+// 		if(){		
+// 		}
+// 		else if() {
+// 		}
+// 		else if() {
+// 		}
+// 		else {
+// 		}
+	
+	// Q. 사용자 입력 - 현재 몇 월인가 ? 
+	// 3월~5월 봄, 6~8월 여름, 9~11 가을, 12~2 겨울 출력
+	
+// 		var month = prompt("현재 몇 월입니까 ?");
+		
+// 		if(3<=month && month <=5){
+// 			alert("봄")
+// 		}
+// 		else if(6<= month&&month<=8){
+// 			alert("여름")
+// 		}
+// 		else if(9<=month&&month<=11){
+// 			alert("가을")
+// 		}
+// 		else if(1<=month&&month<=2 || month ==12){
+// 			alert("겨을")
+// 		}
+// 		else {
+// 			// 잘못된 데이터 입력
+// 		}
+		
+		
+// 		if(){
+// 			실행문; - 실행 가능한 모든 소스 코드
+// 			if(){
+// 				// 중첩 if문
+// 			}
+// 		}
+// 		if(A && B){
+			
+// 		}
+
+		// A && B || C
+		// T 	F	 T
+		// 		a || 1=1
+		
+
+		// 로그인 처리 로직 구현
+		var DBUserId= "itwill";
+		var DBUserPw= "1234";
+		
+		// 1. 아이디 비밀번호 입력
+		// var inputID = prompt("아이디를 입력하시오.");
+		var inputID="itwill";
+		var inputPW="1234";
+		// 2. 회원가입한 아이디와 입력한 아이디가 같은 지 비교
+		if(DBUserId == inputID){
+		// 3-1. 같을 때 
+		// 	4. 비밀번호 비교
+		if(DBUserPw == inputPW){
+			// 5-1. 같을 때
+			//  6. 로그인 성공 !
+			alert(inputID+"님 로그인 성공!")
+		}else{
+			// 5-2. 다를 때
+			//  6. 로그인 실패 ! ("비밀번호가 잘못되었습니다.")
+			alert("비밀번호가 잘못되었습니다.")
+		}
+			
+		}
+		else{
+		// 3-2. 다를 때
+		// 	4. 비밀번호 비교 없이 메시지 출력 
+			alert("회원정보가 없습니다!(로그인실패!)");
+		}
+
+		
+		// 선택문
+		// switch문
+/* 		switch(변수(정수, 문자)){
+			case 값 :
+				실행문; 
+				[break;]
+			case 값 :
+				실행문;
+				[break;]
+			case 값 : 
+				실행문;
+				[break;]
+			
+			default :
+				실행문;
+		} */
+		
+		// Q. 학생의 점수를 입력 받아서 학점을 출력
+		// 100~90 - A, 89~80 B, 79~70 C, 69~60 D, 59~0 F
+		// 데이터 구분
+		// 100|99~90|89~80|79~70|69~60|59~0
+		
+		// Math.floor(99/10)
+		
+		var score = 99;		
+		
+		if(0<=score&&score<=100) {
+		var tmp = Math.floor(score/10);
+		var grade='';
+		switch(tmp){//10,9,8,7,6,...
+		
+		case 10:
+// 			alert('A');
+// 			break;
+		case 9:
+			grade='A';
+			break;
+		case 8:
+			grade='B';
+			break;
+		case 7:
+			grade='C';
+			break;			
+		case 6:
+			grade='D';
+			break;
+		default:
+			grade='F';
+			
+		}//switch
+		alert(grade);
+	}
+
+		// if
+		// 사용자 입력 => 이동할 페이지 정보
+		// (naver,네이버,NAVER)
+	
+		// 페이지 이동
+		// location.href='주소';
+//		location.href='https://www.naver.com';
+		// 문자 데이터는 if 구문 보다는 switch 구문 사용 권장.
+		var input = "네이버";
+		var url = "";
+		
+		switch(input){
+		
+		case "naver":
+		case "NAVER":
+		case "네이버":
+// 			lacation.href='https://www.naver.com';
+			url='www.naver.com';
+			break;
+		}
+		location.href='https://'+url;	
+	
+		
+		
+		
+		
+	
+	
+	
+	
+	</script>
+</head>
+<body>
+	<h1>test3.html</h1>
+</body>
+</html>

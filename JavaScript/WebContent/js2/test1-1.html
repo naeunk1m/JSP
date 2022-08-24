@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+
+function changeColor(c){
+	window.document.bgColor=c;	
+}
+
+</script>
+</head>
+<body>
+<h1>test1-1</h1>
+
+<INPUT TYPE="BUTTON" VALUE = "test1-1 닫기1" ONCLICK="window.close();">
+<INPUT TYPE="BUTTON" VALUE = "test1-1 닫기2" ONCLICK="opener.window.close();">
+<!-- opener 객체는 새 창의 부모 창을 의미한다.(새 창을 만들어준 페이지) -->
+
+<!-- bgColor (window.document 배경 색을 표시하는 속성)) -->
+<input type="radio" name="color" onclick="changeColor('pink');">PINK 
+<input type="radio" name="color" onclick="window.document.bgColor='gray'">GRAY 
+<input type="radio" name="color" onclick="window.document.bgColor='blue'">BLUE
+<input type="radio" name="color" onclick="window.document.bgColor='green'">GREEN
+</body>
+</html>

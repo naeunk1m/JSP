@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// http://localhost:8088/JSP6/busan.com
+// ctrl + alt + r 서버만 실행
+
 public class ItwillServlet extends HttpServlet {
 	// alt + shift + s + v
 	@Override

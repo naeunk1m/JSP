@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+
+	
+	
+	// 버튼 클릭 시 --> test2 페이지 이동 (submit) 
+	function fun1() {
+		alert("fun1() 실행!");
+		// 1. 페이지 이동 주소 변경
+		window.document.fr.action = "test2.html";
+		// 2. 페이지 이동(submit)
+		document.forms[0].submit();
+	}
+	
+	// 아이디, 비밀번호의 입력여부 확인
+	function fun2(){
+		// 1. 입력된 id/pw 가져오기 
+		var id = document.fr.id.value;	
+		var pw = document.fr.pw.value;
+		
+		console.log(" 아이디 : "+id);
+		console.log(" 비밀번호 : "+pw);
+		
+		// 2. 입력된 데이터가 있는 지 확인
+		if(id == ""){
+			alert("아이디를 입력하세요. 11");
+			document.fr.id.focus();
+			return; // 함수 종료
+		}
+// 		if(id.length <= 0){
+// 			alert("아이디를 입력하세요. 22");
+// 		} 아이디를 입력했을 때의 길이가 0보다 작거나 같을 때 출력하라.
+		if(pw == ""){
+			alert("비밀번호를 입력하세요.");
+			document.fr.pw.focus();
+			return; // 함수 종료
+		}
+		
+		// 데이터 전송
+		document.fr.submit();
+	}
+	
+	function fun3(){
+		// 1. 입력된 id/pw 가져오기 
+		var id = document.fr.id.value;	
+		var pw = document.fr.pw.value;
+		
+		console.log(" 아이디 : "+id);
+		console.log(" 비밀번호 : "+pw);
+		
+		// 2. 입력된 데이터가 있는 지 확인
+		if(id == ""){
+			alert("아이디를 입력하세요. 11");
+			document.fr.id.focus();
+			return false; // 함수 종료
+		}
+		if(pw == ""){
+			alert("비밀번호를 입력하세요.");
+			document.fr.pw.focus();
+			return false; // 함수 종료
+		}
+		
+		// 데이터 전송
+		document.fr.submit();
+	}
+	
+
+	
+	</script>
+</head>
+<body>
+	<h1>test3.html</h1>
+	
+	<fieldset>
+		<legend> 폼태그 만들기 </legend>
+<!-- 	action="이동할 페이지 (정보 전달 페이지)" 
+		action="" (생략) 자기 자신 페이지 호출
+		 	
+		method="get" 속성 생략 시 기본 값.
+		-->
+		<form action="" name="fr" method="post" onsubmit="return fun3();">
+			아이디 : <input type="text" name="id"> <br>
+			비밀번호 : <input type="password" name="pw" value=""> <br>
+			
+<!-- 			onclick 이벤트 제어 X -->
+			<input type="submit" value="전송">
+			<hr>
+			<input type="button" value="속성 변경하기" onclick=" fun1(); ">
+			<input type="button" value="데이터 확인" onclick=" fun2(); ">
+		</form> 
+	</fieldset>
+	
+	<script type="text/javascript">
+	// 데이터 유효성체크
+	
+	
+	// 아이디 입력창
+	// window.document.fr.id => ?
+	// window.document.forms[0].id => ?
+			
+	// alert(document.fr.pw);
+	// console.log(document.fr.pw);
+	// document.fr.id.value = "itwill";
+	alert(document.fr.pw.value); 
+	
+			
+	// form태그 접근
+	// window.document.폼태그 이름
+	// window.document.forms[0]
+	</script>
+	<hr>
+<!--	p.24~ -->
+	<h2>HTTP method : GET()/POST()</h2>
+		http://localhost:8088/JavaScript/js2/test3.html? 이름 = 값 & 이름 = 값
+	<h3> GET방식 : 
+		 전송(Submit())할 데이터를 url에 정보를 붙여서 전송하는 방식
+		 1) 데이터의 길이 제한 : 256byte
+		 2) body가 필요없음
+		 3) 빠른 전송 속도
+		 ==> 적은 양의 데이터 전송 시 사용
+		 4) 데이터가 주소 줄에 노출(보안 위협)
+		 ==> 중요 데이터(개인정보) 전달 X
+	</h3>
+		http://localhost:8088/JavaScript/js2/test3.html
+	<h3> POST방식 :
+		 전송(Submit())할 데이터를 본문(body)에 붙여서 전송하는 방식
+		 1) 데이터 길이 제한 : 없음
+		 2) body가 필요함 (정보를 담아간다)
+		 3) 느린 전송 속도
+		 ==> 많은 양의 데이터 전송 시 사용
+		 4) 데이터 주소 줄 노출 X (보안 안정)
+		 ==> 중요데이터 전달 O
+	</h3>
+	
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+		// 객체 - 속성(변수)과 동작(메서드)로 이루어져 있다.
+		
+		//1. 내장 객체 : 자바스크립트 엔진에 포함되어 있는 객체
+		// => 문자(String), 숫자(Number), 배열(Array), 수학(Math), 날짜(Date)
+		
+		//2. 브라우저 객체 모델(Browser Object Model : BOM)
+		// => 계층적 구조  (window(창), screen, location, history, navigator, document)
+		//document.write("aaaa");
+		//document는 객체, write는 메서드
+		
+		//3. 문서 객체 모델(Document Object Model : DOM)
+		// => HTML 문서의 구조
+		
+		// 내장 객체 - 날짜정보 (Date Object)
+		// => 날짜, 시간 정보를 저장관리 객체
+		
+		// 날짜 객체 중 월의 정보는 0~11월 까지로 표시 
+		
+		// var today; 오늘 날짜를 뜻하는 객체가 아니므로 객체 아님 
+		// var[참조변수레퍼런스] = new 생성자();
+		var today = new Date();
+		document.write(today);
+		
+		document.write("<hr>");
+		var day1 = new Date(2002,1,1); // 연, 월-1, 일
+		// var day1 = new Date (2002,1,1,10,10,10)
+		document.write(day1);
+		
+		document.write("<hr>");
+		var day2 = new Date("2010/2/2");
+		document.write(day2);
+		
+		document.write("<hr>");
+		var w = new Date("2002/5/31");
+		
+		/* var cupDay = new Date(2002,4,31);
+		var cupDay = new Date("2002/5/31"); 
+		myGetDay(cupDay.getDay());*/
+		
+		// 오늘 날짜 출력 "2022년 07월 08일"
+		
+		document.write("오늘 날짜 출력 "+
+						today.getFullYear()+"년 "+
+						(today.getMonth()+1)+"월 "+
+						today.getDate()+"일 ");
+		// getDay() 일 ~ 토 (0~6)
+		/* 	if (today.getDay() == 5){
+			document.write(" 금요일");			
+			}  */
+		// document.write(today.getDay()+"요일");		
+			
+		var day ="";
+		switch(today.getDay()){
+		case 0:
+			day ="일요일";
+			break;
+		case 1:
+			day ="월요일";
+			break;
+		case 2:
+			day ="화요일";
+			break;
+		case 3:
+			day ="수요일";
+			break;
+		case 4:
+			day ="목요일";
+			break;
+		case 5:
+			day ="금요일";
+			break;
+		case 6:
+			day ="토요일";
+			break;
+			
+		default : 
+			day ="요일정보없음(error)";
+			
+		}
+		
+		document.write(day);
+		
+		
+		function myGetDay (inputDay){
+		var day = "";	
+		switch(inputDay) {
+		case 0:
+			day = " 일요일";
+			break;
+		case 1:
+			day = " 월요일";
+			break;
+		case 2:
+			day = " 화요일";
+			break;
+		case 3:
+			day = " 수요일";
+			break;
+		case 4:
+			day = " 목요일";
+			break;
+		case 5:
+			day = " 금요일";
+			break;
+		case 6:
+			day = " 토요일";
+			break;	
+		default : 
+			day = "요일정보 없음(error)";
+		}	
+			document.write(day);
+	
+		}
+		document.write("<hr>");
+		document.write("day1 요일 : ");
+		myGetDay(day1.getDay());
+		
+		document.write("<hr>");
+		document.write("day2 요일 : ");
+		myGetDay(day2.getDay());
+		
+		// 특정 일의 요일 정보를 찾아 출력하시오.
+		// 월드컵 개최일의 요일을 구하세요. 2002년 5월 31일
+
+		document.write("<hr>");
+		document.write("월드컵 개최일 : ");
+		myGetDay(w.getDay());
+		
+		
+		// D-Day 계산기
+		// 특정일 - 오늘을 뺀 나머지 일수
+		// 크리스마스(2022/12/25)를 기준으로 남은 일수 계산
+		
+		var Xmas = new Date("2022/12/25");
+		
+		document.write(Xmas - today);
+		// 14629798256(ms)
+		// 1s = 1000ms
+		// 1m = 1000ms * 60
+		// 1h = 1000 * 60 * 60
+		// 1d = 1000 *60 *60 *24
+		
+		var result = (Xmas - today) / (1000 *60 *60 *24);
+		document.write("<hr>");
+		document.write("D-day: "+Math.ceil(result)+"일");
+		
+		
+	
+		
+		
+	</script>
+</head>
+<body>
+	<h1>test6.html</h1>
+</body>
+</html>
