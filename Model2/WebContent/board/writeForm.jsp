@@ -12,14 +12,13 @@
 	<h2> 글쓰기 페이지 </h2>
 	
 	<fieldset>
-		<form action="">
+		<form action="./BoardWriteAction.bo" method="post">
 			글쓴이 : <input type="text" name="name"><br>
 			비밀번호 : <input type="password" name="pass"><br>
 			제목 : <input type="text" name="subject"><br>
 			내용 : <textarea rows="10" cols="20" name="content"></textarea><br>
 			
 			<input type="submit" value="글쓰기">
-			
 		</form>
 	</fieldset>
 </body>

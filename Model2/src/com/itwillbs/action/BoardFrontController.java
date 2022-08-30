@@ -43,6 +43,18 @@ public class BoardFrontController extends HttpServlet{
 				forward.setPath("./board/writeForm.jsp");
 				forward.setRedirect(false);
 			}
+			else if(command.equals("/BoardWriteAction.bo")){
+				System.out.println(" C : /BoardWriteAction.bo 호출");
+				System.out.println(" C : DB 작업 O, 페이지 이동");
+				
+				// BoardWriteAction() 객체 생성
+				BoardWriteAction bwAction = new BoardWriteAction();
+				try {
+					forward = bwAction.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
 			// 2. 가상주소 매핑------------------------------------------------
 			System.out.println(" 2. 가상주소 매핑 - 끝 \n");
