@@ -1,27 +1,27 @@
-package com.itwillbs.db;
+package com.itwillbs.board.db;
 
 import java.sql.Date;
 
 public class BoardDTO {
-	// 자바빈 ==DTO (Data Transfer Object) : 데이터 전송 객체 
-	// DTO => 변수선언, get()/set() 메서드, toString()
+	//자바빈 == DTO( Data Transfer Object ) : 데이터 전송 객체
 	
-	private int bno;			// 게시판 글 번호 (고유값pk)
-	private String name;		// 게시판 글쓴이 
-	private String pass;		// 게시판 글 비밀번호
-	private String subject;		// 게시판 제목
-	private String content;		// 게시판 내용
+	private int bno;				//  게시판 글번호(pk)
+	private String name;			//  게시판 글쓴이
+	private String pass;			//  게시판 글 비밀번호
+	private String subject;			//  게시판 제목
+	private String content;			//  게시판 내용
 	
-	private int readcount;		// 조회수
-	private int re_ref;			// 답글 - 그룹번호
-	private int re_lev;			// 답글 - 그룹 레벨값(들여쓰기)
-	private int re_seq;			// 답글 - 그룹 순서
+	private int readcount;			// 조회수
+	private int re_ref;				// 답글 - 그룹번호
+	private int re_lev;				// 답글 - 그룹 레벨값 (들여쓰기)
+	private int re_seq;				// 답글 - 그룹 순서
 	
-	private Date date;			// 작성일자
-	private String ip;			// 작성자 ip
-	private String file;		// 첨부파일
+	private Date date;				//  작성일
+	private String ip;				//  작성자 IP
+	private String file;			//  첨부파일
 	
-	// alt shift s r get()/set()
+	
+	// alt shift s + r    (set/get())
 	public int getBno() {
 		return bno;
 	}
@@ -95,15 +95,13 @@ public class BoardDTO {
 		this.file = file;
 	}
 	
-	// alt shift s s toString() 단축키
+	// alt shift s + s   (toString)
 	@Override
 	public String toString() {
 		return "BoardDTO [bno=" + bno + ", name=" + name + ", pass=" + pass + ", subject=" + subject + ", content="
 				+ content + ", readcount=" + readcount + ", re_ref=" + re_ref + ", re_lev=" + re_lev + ", re_seq="
 				+ re_seq + ", date=" + date + ", ip=" + ip + ", file=" + file + "]";
 	}
-	
 
-	
 	
 }

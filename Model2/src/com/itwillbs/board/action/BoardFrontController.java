@@ -1,4 +1,4 @@
-package com.itwillbs.action;
+package com.itwillbs.board.action;
 
 import java.io.IOException;
 
@@ -32,32 +32,49 @@ public class BoardFrontController extends HttpServlet{
 			
 			System.out.println("\n  2. 가상주소 매핑 - 시작");
 			// 2. 가상주소 매핑------------------------------------------------
+			Action action = null;
 			ActionForward forward = null;
 			
 			if(command.equals("/BoardWrite.bo")){
 				// 글쓰기 페이지 보여주기 (DB정보 필요없음)
 				System.out.println(" C : /BoardWrite.bo 호출 ");
-				System.out.println(" C : DB정보가 필요없음 - view 페이지로 이동");
+				System.out.println(" C : DB정보가 필요없음-view페이지로 이동 ");
 				
 				forward = new ActionForward();
 				forward.setPath("./board/writeForm.jsp");
 				forward.setRedirect(false);
 			}
 			else if(command.equals("/BoardWriteAction.bo")){
-				System.out.println(" C : /BoardWriteAction.bo 호출");
-				System.out.println(" C : DB 작업 O, 페이지 이동");
+				System.out.println(" C : /BoardWriteAction.bo 호출 ");
+				System.out.println(" C : DB작업 o, 페이지 이동");
 				
 				// BoardWriteAction() 객체 생성
-				BoardWriteAction bwAction = new BoardWriteAction();
+//				BoardWriteAction bwAction = new BoardWriteAction();
+				action = new BoardWriteAction();
 				try {
-					forward = bwAction.execute(request, response);
+//				    forward = bwAction.execute(request, response);
+					forward = action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+			}else if(command.equals("/BoardList.bo")){
+				 System.out.println(" C : /BoardList.bo 호출 ");
+				 System.out.println(" C : DB정보가 필요,페이지 이동x,페이지 출력o");
+				 
+				 // BoardListAction() 객체 생성
+				 action = new BoardListAction();
+				 try {
+					 System.out.println(" C : 해당 Model 객체 호출 ");
+//					forward = listAction.execute(request, response);
+					forward = action.execute(request, response);
+				 } catch (Exception e) {
+				 	e.printStackTrace();
+				 }
 			}
 			
 			// 2. 가상주소 매핑------------------------------------------------
-			System.out.println(" 2. 가상주소 매핑 - 끝 \n");
+			System.out.println("  2. 가상주소 매핑 - 끝 \n");
 			
 			System.out.println("\n  3. 가상주소 이동 - 시작");
 			// 3. 가상주소 이동------------------------------------------------
