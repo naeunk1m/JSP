@@ -5,7 +5,7 @@
 		name="jdbc/model2" 
 		auth="Container" 
 		type="javax.sql.DataSource" 
-		driverClassName="con.mysql.cj.jdbc.Driver" 
+		driverClassName="com.mysql.cj.jdbc.Driver" 
 		username="root" 
 		password="1234" 
 		url="jdbc:mysql://localhost:3306/jspdb" 

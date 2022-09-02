@@ -16,7 +16,7 @@ public class BoardDAO {
 	// DAO (Data Access Object) : 데이터 처리 객체
 	
 	// 공통변수 (인스턴스 변수)
-	private Connection con = null;
+	private Connection con = null;   // 디비 연결정보 저장 객체
 	private PreparedStatement pstmt = null; //디비에 SQL 실행 처리 객체
 	private ResultSet rs = null;	//select 실행 결과 저장 객체
 	private String sql = "";		// SQL쿼리 구문 저장
@@ -45,12 +45,13 @@ public class BoardDAO {
 //		return con;
 //	}
 	
+	
 	private Connection getConnect() throws Exception{
 		// 디비 연결정보 - context.xml
 		
 		// 프로젝트 정보를 초기화
 		Context initCTX = new InitialContext();
-		// 초기화된 프로젝트 정보 중 데이터 불러오기
+		// 초기화된 프로젝트 정보중 데이터 불러오기
 		DataSource ds
 		   = (DataSource)initCTX.lookup("java:comp/env/jdbc/model2");
 		// 연결된 정보를 바탕으로 connection 정보를 리턴
@@ -77,6 +78,7 @@ public class BoardDAO {
 	
 	// 글쓰기 - boardWrite()
 	public void boardWrite(BoardDTO dto){
+		System.out.println("\n DAO : boardWrite(BoardDTO dto) 호출 ");
 		int bno = 0;  //글번호 저장 
 		
 		try {
@@ -144,6 +146,7 @@ public class BoardDAO {
 	
 	// 글 목록 조회(all) - getBoardList()
 	public List<BoardDTO> getBoardList(){
+		System.out.println("\n DAO : getBoardList() 호출");
 		
 		// 글정보 모두를 저장하는 배열(가변길이)
 //		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
@@ -198,12 +201,12 @@ public class BoardDAO {
 	}
 	// 글 목록 조회(all) - getBoardList()
 	
-	// 글 목록 조회(all) - getBoardList(int startRow,int pageSize)
-	public List<BoardDTO> getBoardList(int startRow, int pageSize){
-		System.out.println("\n DAO : getBoardList(int startRow, int pageSize) 호출");
+	// 글 목록 조회 - getBoardList(int startRow,int pageSize)
+	public List<BoardDTO> getBoardList(int startRow,int pageSize){
+		System.out.println("\n DAO : getBoardList(int startRow,int pageSize) 호출");
 		
 		// 글정보 모두를 저장하는 배열(가변길이)
-		// ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+//		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		
 		try {
@@ -211,22 +214,20 @@ public class BoardDAO {
 			// 2. 디비연결
 			con = getConnect();
 			// 3. sql 작성 & pstmt 객체
-			// sql = "select * from itwill_board";(X)
+			//sql = "select * from itwill_board"; (x)
 			
-			// limit 시작행 -1, 개수 : 시작 지점부터 해당 개수만큼 잘라오기
-			// 정렬 re_ref 내림차순, re_seq 오름차순
+			// limit 시작행-1,개수  : 시작 지점부터 해당 개수만큼 짤라오기
+			// 정렬 : re_ref 내림차순, re_seq 오름차순
 			
-			
-			sql = "select * from itwill_board order by "
-					+ "re_ref desc, re_seq asc limit ?,?";
-			
+			sql = "select * from itwill_board "
+					+ "order by re_ref desc, re_seq asc "
+					+ "limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			
-			// ????????????????????????????
-			pstmt.setInt(1, startRow-1); // 시작행 -1
+			// ????
+			pstmt.setInt(1, startRow-1); // 시작행 - 1
 			pstmt.setInt(2, pageSize);
-			
 			
 			// 4. sql 실행
 			rs = pstmt.executeQuery();
@@ -255,7 +256,7 @@ public class BoardDAO {
 				
 			}// while
 			
-			System.out.println(" C : 게시판 목록 모두 저장완료 ");
+			System.out.println(" DAO : 게시판 목록 모두 저장완료 ");
 			//System.out.println(" C : "+boardList);			
 			
 		} catch (Exception e) {
@@ -264,32 +265,36 @@ public class BoardDAO {
 			closeDB();
 		}
 		
-		
 		return boardList;
 	}
+	// 글 목록 조회- getBoardList(int startRow,int pageSize)
 	
 	
-	// 글 개수 조회 (all) - getBoardCount()
+	
+	
+
+	// 글 개수 조회(all) - getBoardCount()
 	public int getBoardCount(){
-		System.out.println("DAO : getBoardCount() 실행");
+		System.out.println("\n DAO : getBoardCount() 실행");
 		int cnt = 0;
 		
 		try {
-			// 1.2. 디비연결(커넥션풀)
-			getConnect();
-			// 3. sql 쿼리문 작성(select) & pstmt 객체 생성
+			// 1.2. 디비 연결 (커넥션풀)
+			con = getConnect();
+			// 3. sql 작성(select) & pstmt 객체 
 			sql = "select count(*) from itwill_board";
 			pstmt = con.prepareStatement(sql);
 			// 4. sql 실행
 			rs = pstmt.executeQuery();
 			// 5. 데이터 처리
 			if(rs.next()){
-				// 데이터 있을 때
+				// 데이터 있을때
 				//cnt = rs.getInt("count(*)");
-				cnt = rs.getInt(1); // 1번 인덱스에 있는 거 가져올 때
+				cnt = rs.getInt(1); // 1번 인덱스
 			}
 			
-			System.out.println("DAO : 글 개수 - 총 : "+cnt+"개");
+			System.out.println(" DAO : 글 개수 - 총 : "+cnt+"개");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -297,15 +302,87 @@ public class BoardDAO {
 		}
 		
 		return cnt;
+	}	
+	// 글 개수 조회(all) - getBoardCount()
+	
+	
+	// 글 조회수 1증가 - updateReadcount(bno)
+	public void updateReadcount(int bno){
+		System.out.println(" C : updateReadcount(int bno) 호출 ");
+		
+		try {
+			//1.2. 디비연결
+			con = getConnect();
+			//3. sql 작성(update) & pstmt 객체
+			sql = "update itwill_board set readcount=readcount+1 where bno = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			//???
+			pstmt.setInt(1, bno);
+			//4. sql 실행
+			pstmt.executeUpdate();
+			
+			System.out.println(" DAO : 게시판글 조회수 1증가 완료!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
 	}
 	
-	
-	// 글 개수 조회 (all) - getBoardCount()
-	
+	// 글 조회수 1증가 - updateReadcount(bno)
 	
 	
+	// 특정글 1개의 정보 조회 - getBoard(bno)
+	public BoardDTO getBoard(int bno){
+		System.out.println(" DAO : getBoard(bno) 호출 ");
+		BoardDTO dto = null;
 	
+		try {
+			// 1.2. 디비연결
+			con = getConnect();
+			// 3. sql작성(select) & pstmt 객체
+			sql = "select * from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			// ???
+			pstmt.setInt(1, bno);
+			
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()){
+				// DB에 특정 번호의 글번호를 저장
+
+				// DB -> DTO
+				dto = new BoardDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setContent(rs.getString("content"));
+				dto.setDate(rs.getDate("date"));
+				dto.setFile(rs.getString("file"));
+				dto.setIp(rs.getString("ip"));
+				dto.setName(rs.getString("name"));
+				dto.setPass(rs.getString("pass"));
+				dto.setRe_lev(rs.getInt("re_lev"));
+				dto.setRe_ref(rs.getInt("re_ref"));
+				dto.setRe_seq(rs.getInt("re_seq"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setSubject(rs.getString("subject"));
+				
+			}//if
+			
+			System.out.println(" DAO : "+bno+"번 게시글 정보 저장 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return dto;
+	}
 	
+	// 특정글 1개의 정보 조회 - getBoard(bno)
 	
 	
 	

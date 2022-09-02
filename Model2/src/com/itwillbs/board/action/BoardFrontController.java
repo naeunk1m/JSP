@@ -49,7 +49,7 @@ public class BoardFrontController extends HttpServlet{
 				System.out.println(" C : DB작업 o, 페이지 이동");
 				
 				// BoardWriteAction() 객체 생성
-//				BoardWriteAction bwAction = new BoardWriteAction();
+				//BoardWriteAction bwAction = new BoardWriteAction();
 				action = new BoardWriteAction();
 				try {
 //				    forward = bwAction.execute(request, response);
@@ -63,15 +63,33 @@ public class BoardFrontController extends HttpServlet{
 				 System.out.println(" C : DB정보가 필요,페이지 이동x,페이지 출력o");
 				 
 				 // BoardListAction() 객체 생성
+				 //BoardListAction listAction = new BoardListAction();
 				 action = new BoardListAction();
 				 try {
 					 System.out.println(" C : 해당 Model 객체 호출 ");
-//					forward = listAction.execute(request, response);
+					//forward = listAction.execute(request, response);
 					forward = action.execute(request, response);
 				 } catch (Exception e) {
 				 	e.printStackTrace();
 				 }
 			}
+			else if(command.equals("/BoardContent.bo")){
+				System.out.println(" C : /BoardContent.bo 호출 ");
+				System.out.println(" C : DB정보 사용, 출력");
+				
+				// BoardContentAction 객체
+				action = new BoardContentAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+			
+			
+			
 			
 			// 2. 가상주소 매핑------------------------------------------------
 			System.out.println("  2. 가상주소 매핑 - 끝 \n");

@@ -9,6 +9,7 @@
 <body>
     <!-- index.jsp -->
     <%
+    
        // MVC 프로젝트 실행 시작페이지
        
        //** MVC 프로젝트에서는 index.jsp 페이지 외 절대로 .jsp페이지 실행금지
