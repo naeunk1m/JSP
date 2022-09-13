@@ -12,6 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.mysql.cj.Query;
+
 public class BoardDAO {
 	// DAO (Data Access Object) : 데이터 처리 객체
 	
@@ -384,7 +386,57 @@ public class BoardDAO {
 	
 	// 특정글 1개의 정보 조회 - getBoard(bno)
 	
-	
+	// 글 정보 수정 - updateBoard(dto)
+	public int updateBoard(BoardDTO dto) {
+		int result = -1;
+		
+		try {
+			// 1.2 디비연결
+			con = getConnect();
+			// 3. sql 작성 & pstmt 객체
+			sql = "select pass from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			// ??????????
+			pstmt.setInt(1, dto.getBno());
+			
+			// 4. sql 실행
+			pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()){
+				// 게시판에 글이 있기는 하나, 비밀번호 비교할 것.
+				if(dto.getPass().equals(rs.getString("pass"))){
+					// 글도 있고, 비밀번호도 일치
+					// 3. sql -update& pstmt 객체
+					sql = "update itwill_board set name=?,subject=?,content=? where bno=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, dto.getName());
+					pstmt.setString(2, dto.getSubject());
+					pstmt.setString(3, dto.getContent());
+					pstmt.setInt(4, dto.getBno());
+					// 4. sql 실행 
+					result = pstmt.executeUpdate();
+					
+				}else{
+					// 글은 있지만 비밀번호가 다름을 의미.
+					result=0;
+				}
+			}else{
+				// 게시판에 글이 없음을 의미
+				result = -1;
+			}
+			
+			System.out.println(" DAO : 글 수정 완료 ("+result+")");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return result;
+	}
+	// 글 정보 수정 - updateBoard(dto)
 	
 	
 	

@@ -13,58 +13,56 @@
 		$('#join').submit(function(){
 // 			alert("전송");
 			if($('.id').val()==""){
-				alert('아이디 입력하세요.');
+				alert('아이디 입력하세요');
 				$('.id').focus();
 				return false;
 			}
 			if($('.pw').val()==""){
-				alert('비밀번호 입력하세요.');
+				alert('비밀번호 입력하세요');
 				$('.pw').focus();
 				return false;
 			}
 			if($('.pw').val()!=$('.pw2').val()){
-				alert('비밀번호 입력하세요.');
+				alert('비밀번호 확인하세요');
 				$('.pw2').focus();
 				return false;
 			}
 			if($('.name').val()==""){
-				alert('이름 입력하세요.');
+				alert('이름 입력하세요');
 				$('.name').focus();
 				return false;
 			}
 			if($('.email').val()==""){
-				alert('이메일 입력하세요.');
+				alert('이메일 입력하세요');
 				$('.email').focus();
 				return false;
 			}
 			if($('.email').val()!=$('.email2').val()){
-				alert('이메일 입력하세요.');
+				alert('이메일 확인하세요');
 				$('.email2').focus();
 				return false;
 			}
-			
-		});
+		});//
 		
-		// 아이디 중복체크
+		//아이디 중복체크
 		$('.dup').click(function(){
 // 			alert("중복");
 			$.ajax({
 				url:'idcheck.jsp',
-				data:{'id':$('id').val()},
+				data:{'id':$('.id').val()},
 				success:function(rdata){
 					$('.iddiv').html(rdata);
 				}
-			})
+			});
 		});
 		
-		
-	});
-</script>
+	});//
+</script> 
 </head>
 <body>
 <div id="wrap">
 <!-- 헤더들어가는 곳 -->
-<jsp:include page="../inc/top.jsp"/>
+<jsp:include page="../inc/top.jsp" />
 <!-- 헤더들어가는 곳 -->
 
 <!-- 본문들어가는 곳 -->
@@ -82,7 +80,7 @@
 <!-- 본문내용 -->
 <article>
 <h1>Join Us</h1>
-<form action="joinPro.jsp" id="join" method="post"> 
+<form action="joinPro.jsp" id="join" method="post">
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
@@ -124,7 +122,7 @@
 
 <div class="clear"></div>
 <!-- 푸터들어가는 곳 -->
-<jsp:include page="../inc/bottom.jsp"/>
+<jsp:include page="../inc/bottom.jsp" />
 <!-- 푸터들어가는 곳 -->
 </div>
 </body>

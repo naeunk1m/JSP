@@ -124,7 +124,7 @@ public class MemberDAO {
 			// 1.2. 디비연결
 			 con = getCon();
 
-			// 3. SQL 작성(select) & pstmt 객체  
+			// 3. SQL 작성(select) & pstmt 객체
 			String sql = "select pw from itwill_member where id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 

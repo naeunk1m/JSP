@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <header>
-
 <%
-// 세션값 가져오기
-String loginID = (String)session.getAttribute("loginID");
-if(loginID == null){
-	// 로그인 안한 상태 -> 세션값 (loginID) 없음
+//세션값 가져오기
+String loginID=(String)session.getAttribute("loginID");
+if(loginID==null){
+	//로그인 안한 상태 => 세션값 (loginID) 없음
 	%>
-	<div id="login"><a href="../member/login.jsp">login</a> | 
-					<a href="../member/join.jsp">join</a></div>
-	<% 
+<div id="login"><a href="../member/login.jsp">login</a> | 
+                <a href="../member/join.jsp">join</a></div>	
+	<%		
 }else{
-// 로그인 성공 -> 세션값 (loginID) 있음
-	%>
-	<div id="login"><%=loginID %>님 | <a href="../member/logout.jsp">logout</a> | 
-					<a href="../member/update.jsp">update</a></div>
-	<%
-	}
+	//로그인 성공 => 세션값 (loginID) 있음 
+			%>
+<div id="login"><%=loginID %> 님 | <a href="../member/logout.jsp">logout</a> | 
+                <a href="../member/update.jsp">update</a></div>				
+			<%
+}
 %>
+
 
 <div class="clear"></div>
 <!-- 로고들어가는 곳 -->
