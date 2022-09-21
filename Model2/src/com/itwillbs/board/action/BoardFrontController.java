@@ -133,9 +133,26 @@ public class BoardFrontController extends HttpServlet{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else if(command.equals("/BoardReWrite.bo")){
+				System.out.println(" C: /BoardReWrite.bo 호출 ");
+				System.out.println(" C: DB 사용x,view 페이지 이동");
 				
+				forward = new ActionForward();
+				forward.setPath("./board/reWriteForm.jsp");
+				forward.setRedirect(false);				
+			} else if (command.equals("/BoardReWriteAction.bo")){
+				System.out.println("C : /BoardReWriteAction.bo 호출");
+				System.out.println("C : DB 사용O, 페이지 이동 (list)");
 				
-			}
+				// BoardReWriteAction() 객체 생성
+				action = new BoardReWriteAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} 
 			
 			
 			

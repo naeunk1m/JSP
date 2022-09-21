@@ -12,8 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.mysql.cj.Query;
-
 public class BoardDAO {
 	// DAO (Data Access Object) : 데이터 처리 객체
 	
@@ -386,51 +384,52 @@ public class BoardDAO {
 	
 	// 특정글 1개의 정보 조회 - getBoard(bno)
 	
+	
 	// 글 정보 수정 - updateBoard(dto)
-	public int updateBoard(BoardDTO dto) {
+	public int updateBoard(BoardDTO dto){
 		int result = -1;
 		
 		try {
-			// 1.2 디비연결
+			// 1.2. 디비연결
 			con = getConnect();
 			// 3. sql 작성 & pstmt 객체
 			sql = "select pass from itwill_board where bno=?";
 			pstmt = con.prepareStatement(sql);
-			// ??????????
 			pstmt.setInt(1, dto.getBno());
 			
 			// 4. sql 실행
-			pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			// 5. 데이터 처리
 			if(rs.next()){
-				// 게시판에 글이 있기는 하나, 비밀번호 비교할 것.
+				// 게시판 글 있다
 				if(dto.getPass().equals(rs.getString("pass"))){
-					// 글도 있고, 비밀번호도 일치
-					// 3. sql -update& pstmt 객체
+					// 3. sql -update & pstmt 객체
 					sql = "update itwill_board set name=?,subject=?,content=? where bno=?";
 					pstmt = con.prepareStatement(sql);
+					
 					pstmt.setString(1, dto.getName());
 					pstmt.setString(2, dto.getSubject());
 					pstmt.setString(3, dto.getContent());
 					pstmt.setInt(4, dto.getBno());
-					// 4. sql 실행 
+					// 4. sql 실행
 					result = pstmt.executeUpdate();
 					
 				}else{
-					// 글은 있지만 비밀번호가 다름을 의미.
-					result=0;
-				}
+					// 비밀번호 다름
+					result = 0;
+				}			
+				
 			}else{
-				// 게시판에 글이 없음을 의미
-				result = -1;
+				// 게시판 글 없음
+				result = -1;				
 			}
 			
 			System.out.println(" DAO : 글 수정 완료 ("+result+")");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			closeDB();
 		}
 		
@@ -438,43 +437,114 @@ public class BoardDAO {
 	}
 	// 글 정보 수정 - updateBoard(dto)
 	
+	
 	// 글 정보 삭제 - deleteBoard(dto)
-		public int deleteBoard(BoardDTO dto){
-			int result = -1;
+	public int deleteBoard(BoardDTO dto){
+		int result = -1;
+		
+		try {
+			// 1.2. 디비연결
+			con = getConnect();
+			// 3. sql 작성 & pstmt 객체
+			sql = "select pass from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getBno());
 			
-			try {
-				// 1.2. 디비연결
-				con = getConnect();
-				// 3. sql 작성 & pstmt 객체
-				sql = "select pass from itwill_board where bno=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, dto.getBno());
-				
-				// 4. sql 실행
-				rs = pstmt.executeQuery();
-				
-				// 5. 데이터 처리
-				if(rs.next()){
-					// 게시판 글 있다
-					if(dto.getPass().equals(rs.getString("pass"))){
-						// 3. sql - delete & pstmt 객체
-						sql = "delete from itwill_board where bno=?";
-						pstmt = con.prepareStatement(sql);
-						pstmt.setInt(1, dto.getBno());
-						
-						// 4. sql 실행
-						result = pstmt.executeUpdate();
-					}else{
-						// 비밀번호 다름
-						result = 0;
-					}			
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()){
+				// 게시판 글 있다
+				if(dto.getPass().equals(rs.getString("pass"))){
+					// 3. sql - delete & pstmt 객체
+					sql = "delete from itwill_board where bno=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, dto.getBno());
+					// 4. sql 실행
+					result = pstmt.executeUpdate();
 					
 				}else{
-					// 게시판 글 없음
-					result = -1;				
+					// 비밀번호 다름
+					result = 0;
+				}			
+				
+			}else{
+				// 게시판 글 없음
+				result = -1;				
+			}
+			
+			System.out.println(" DAO : 글 삭제 완료 ("+result+")");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+	}
+	// 글 정보 삭제 - deleteBoard(dto)
+	
+	// 답글쓰기 메서드  - reInsertBoard(dto)
+		public void reInsertBoard(BoardDTO dto){
+			int bno=0;
+			
+			try {
+				con = getConnect();
+				// 1) bno 계산하기
+				sql = "select max(bno) from itwill_board";
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					bno = rs.getInt(1)+1;
+					//bno = rs.getInt("max(bno)")+1;
 				}
 				
-				System.out.println(" DAO : 글 삭제 완료 ("+result+")");
+				System.out.println("DAO : 답글 bno :" + bno);
+				// 2) 답글 순서 재배치 (update)
+				// 같은 그룹에 있으면서 (re_ref) 
+				// 기존의 순서(re_seq)보다 큰 값이 있을 때만 수정 
+				sql = "update itwill_board set re_seq=re_seq+1 "
+						+ "where re_ref=? and re_seq>?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, dto.getRe_ref());
+				pstmt.setInt(2, dto.getRe_seq());
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result > 0){
+					System.out.println("DAO : 답글 순서 재배치 완료");
+				}
+				// 3) 답글 쓰기 (insert) : ref, lev, seq 계산하기
+				sql = "insert into itwill_board(bno, name, pass, subject, content,"
+						+ "readcount, re_ref, re_lev, re_seq, date, ip, file) "
+						+ "values(?,?,?,?,?,?,?,?,?,now(),?,?)";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, bno); // 1단계 계산한 bno
+				pstmt.setString(2, dto.getName());
+				pstmt.setString(3, dto.getPass());
+				pstmt.setString(4, dto.getSubject());
+				pstmt.setString(5, dto.getContent());
+				
+				pstmt.setInt(6, 0); // 조회수 항상 0 
+				pstmt.setInt(7, dto.getRe_ref()); // re_ref : 원글의 ref 번호 그대로 사용 
+				pstmt.setInt(8, dto.getRe_lev()); // re_lev : 원글 lev+1
+				pstmt.setInt(9, dto.getRe_seq()); // re_seq : 원글 seq+1
+				
+				pstmt.setString(10, dto.getIp()); 
+				pstmt.setString(11, dto.getFile());
+				
+				pstmt.executeUpdate();
+				
+				System.out.println(" DAO : 답글 작성 완료 ! ");
+				
+				
+				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -482,12 +552,10 @@ public class BoardDAO {
 				closeDB();
 			}
 			
-			return result;
+			
 		}
-		// 글 정보 삭제 - deleteBoard(dto)
-	
-	
+	// 답글쓰기 메서드  - reInsertBoard(dto)
 	
 	
 
-}// class
+}// DAO class

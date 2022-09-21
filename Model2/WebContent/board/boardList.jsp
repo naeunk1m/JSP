@@ -30,6 +30,10 @@
 	     <tr>
 	        <td>${dto.bno }</td>
 	        <td>
+	         <c:if test="${dto.re_lev > 0 }">
+		         <img src="./board/level.gif" width="${dto.re_lev * 10 }">
+		         <img src="./board/re.gif">
+	         </c:if>
 	       	 <a href="./BoardContent.bo?bno=${dto.bno }&pageNum=${requestScope.pageNum}">${dto.subject }</a>
 	        </td>
 	        <td>${dto.name }</td>

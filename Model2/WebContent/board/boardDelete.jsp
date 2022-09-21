@@ -7,23 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>boardDelete.jsp</h1>
-	<%
-		// /BoardDelete.bo?bno=32&pageNum=1
-		// int bno=Integer.parseInt(request.getParameter("bno"));
-		// String pageNum = request.getParameter("pageNum");
-	%>
-	<!-- el표현식 사용  -->
-	bno: ${param.bno }
-	pageNum : ${param.pageNum }
-	<fieldset>
-		<legend>게시글 삭제하기</legend>
-		<form action="./boardDeleteAction.bo?pageNum=${param.pageNum }" method="post">
-			<!-- <input type="hidden" name="bno" value="${param.bno }"> -->
-			
-			비밀번호 : <input type="password" name="pass">
-			<input type="submit" value="삭제하기">
-		</form>
-	</fieldset>
+   <h1>boardDelete.jsp</h1>
+   <%
+     // /BoardDelete.bo?bno=32&pageNum=1
+     // int bno = Integer.parseInt(request.getParameter("bno"));
+     // String pageNum = request.getParameter("pageNum");
+   %>
+   bno : ${param.bno }
+   pageNum : ${param.pageNum }
+   <fieldset>
+      <legend> 게시글 삭제하기 </legend>
+      <form action="./BoardDeleteAction.bo?pageNum=${param.pageNum }" method="post">
+         <input type="hidden" name="bno" value="${param.bno }">
+        <%--  <input type="hidden" name="pageNum" value="${param.pageNum}"> --%>
+         
+         비밀번호 : <input type="password" name="pass">
+         <input type="submit" value="삭제하기">
+      </form>   
+   </fieldset>
+   
+   
 </body>
 </html>

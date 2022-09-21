@@ -19,7 +19,7 @@
       // response.sendRedirect("./Test.bo");
     
       // 글쓰기 페이지 이동
-// 	  response.sendRedirect("./BoardWrite.bo");
+	  //response.sendRedirect("./BoardWrite.bo");
        
        // 글 리스트 페이지 이동
        response.sendRedirect("./BoardList.bo");

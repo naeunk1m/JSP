@@ -16,11 +16,12 @@
    %>
    <fieldset>
       <form action="./BoardUpdatePro.bo?pageNum=${pageNum }" method="post">
-    	<input type="hidden" name="bno" value="${dto.bno }">
-		         글쓴이 : <input type="text" name="name" value="${dto.name }"><br>
-		         비밀번호 : <input type="password" name="pass"><br>
-		         제목 : <input type="text" name="subject" value="${dto.subject }"><br>
-		         내용 : <textarea rows="10" cols="20" name="content">${dto.content }</textarea><br>
+         <input type="hidden" name="bno" value="${dto.bno }">
+         글쓴이 : <input type="text" name="name" value="${dto.name }"><br>
+         비밀번호 : <input type="password" name="pass"><br>
+         제목 : <input type="text" name="subject" value="${dto.subject }"><br>
+         내용 : <textarea rows="10" cols="20" name="content">${dto.content }</textarea><br>
+      
         <input type="submit" value="글수정">
       </form>  
    </fieldset>
