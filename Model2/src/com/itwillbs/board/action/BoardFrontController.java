@@ -113,6 +113,29 @@ public class BoardFrontController extends HttpServlet{
 					e.printStackTrace();
 				}
 			}
+			else if(command.equals("/BoardDelete.bo")){
+				System.out.println("C : /BoardDelete.bo 호출");
+				System.out.println("C : DB X, view 페이지 이동");
+				
+				forward=new ActionForward();
+				forward.setPath("./board/boardDelete.jsp");
+				forward.setRedirect(false);
+			}
+			else if(command.equals("/BoardDeleteAction.bo")){
+				System.out.println("C : /BoardDeleteAction.bo 호출");
+				System.out.println("C : DB 사용, 페이지 이동 ");
+				
+				// BoardDeleteAction() 객체 생성 
+				action = new BoardDeleteAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
 			
 			
 			

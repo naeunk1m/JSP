@@ -438,6 +438,54 @@ public class BoardDAO {
 	}
 	// 글 정보 수정 - updateBoard(dto)
 	
+	// 글 정보 삭제 - deleteBoard(dto)
+		public int deleteBoard(BoardDTO dto){
+			int result = -1;
+			
+			try {
+				// 1.2. 디비연결
+				con = getConnect();
+				// 3. sql 작성 & pstmt 객체
+				sql = "select pass from itwill_board where bno=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, dto.getBno());
+				
+				// 4. sql 실행
+				rs = pstmt.executeQuery();
+				
+				// 5. 데이터 처리
+				if(rs.next()){
+					// 게시판 글 있다
+					if(dto.getPass().equals(rs.getString("pass"))){
+						// 3. sql - delete & pstmt 객체
+						sql = "delete from itwill_board where bno=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, dto.getBno());
+						
+						// 4. sql 실행
+						result = pstmt.executeUpdate();
+					}else{
+						// 비밀번호 다름
+						result = 0;
+					}			
+					
+				}else{
+					// 게시판 글 없음
+					result = -1;				
+				}
+				
+				System.out.println(" DAO : 글 삭제 완료 ("+result+")");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return result;
+		}
+		// 글 정보 삭제 - deleteBoard(dto)
+	
 	
 	
 	
